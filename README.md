@@ -19,3 +19,23 @@ This is an example of blog app (CRUD) created by me from scratch to show my deve
 - JWT
 
 - bcrypt
+
+
+
+### What you can do:
+
+- create account
+
+- log in
+
+- create posts
+
+- edit posts
+
+- delete posts
+
+- create comments
+
+- edit comments
+
+- delete comments
