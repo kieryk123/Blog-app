@@ -1,21 +1,21 @@
-# Introduction 
-Create simple REST API in NODEJS using Express framework.
+# Overview
 
-Main topic of application is BLOG/Diary.
+This is an example of blog app (CRUD) created by me from scratch to show my development skills.
 
-Application should allow create/read/update/delete(CRUD) posts and comments.
 
-# Implementation
 
-## Stage 1
+### Used technologies and tools:
 
-- Create endpoints to CRUD operations on posts and comments.
-- Data should store in serialized file (using module `fs`, etc.)
-- Remember: logic should splitted to small pieces and code should implemented with main design principles `DRY` and `KISS`!
+- React + Redux
 
-## Stage 2
-- Create middleware to logging traffic to server
-- Create middleware to protect our resource. Create/update/delete posts/comments should only available for granted user with special permissions. To do this implement JWT token and create endpoints to sign in
+- Express + MongoDB
 
-## Stage 3
-- Change storing data system to MongoDB/Mongoose
+- redux-thunk
+
+- react-router
+
+- axios
+
+- JWT
+
+- bcrypt
