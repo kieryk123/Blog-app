@@ -5,6 +5,13 @@ const apiClient = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/feed`
 });
 
+apiClient.interceptors.request.use((config) => {
+    const state = store.getState();
+    const authToken = state.user.authToken;
+    config.headers.Authorization = `Bearer ${authToken}`;
+    return config;
+});
+
 export default {
     getPosts() {
         return apiClient.get('/posts');
@@ -13,34 +20,12 @@ export default {
         return apiClient.get(`/post/${id}`);
     },
     createPost(postData) {
-        const state = store.getState();
-        const authToken = state.user.authToken;
-
-        return apiClient.post('/post', postData, {
-            headers: {
-                'Authorization': `Bearer ${authToken}`
-            }
-        });
+        return apiClient.post('/post', postData);
     },
     updatePost(id, postData) {
-        const state = store.getState();
-        const authToken = state.user.authToken;
-
-        return apiClient.post(`/edit-post/${id}`, postData, {
-            headers: {
-                'Authorization': `Bearer ${authToken}`
-            }
-        });
+        return apiClient.post(`/edit-post/${id}`, postData);
     },
     deletePost(id) {
-        const state = store.getState();
-        const authToken = state.user.authToken;
-
-        return apiClient.delete('/delete-post', {
-            headers: {
-                'Authorization': `Bearer ${authToken}`
-            },
-            data: { id }
-        });
+        return apiClient.delete('/delete-post', { data: { id } });
     }
 }
