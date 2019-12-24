@@ -6,9 +6,11 @@ import { removePost } from '@/store/posts/operations';
 
 const MyPosts = () => {
     const dispatch = useDispatch();
-    const posts = useSelector(state => state.posts.list);
     const isLoading = useSelector(state => state.posts.isLoading);
     const userId = useSelector(state => state.user.userId);
+    const posts = useSelector(state => state.posts.list
+        .filter(post => post.author._id.toString() === userId)
+        .sort((postA, postB) => new Date(postB.createdAt) - new Date(postA.createdAt)));
 
     const handleDelete = id => {
         dispatch(removePost(id))
@@ -33,17 +35,14 @@ const MyPosts = () => {
                         <div>
                             <h2 className="mb-3">Your posts:</h2>
                             {
-                                posts
-                                    .sort((postA, postB) => new Date(postB.createdAt) - new Date(postA.createdAt))
-                                    .filter(post => post.author._id.toString() === userId).map(post =>
-                                        <PostCard
-                                            key={post._id}
-                                            post={post}
-                                            editable
-                                            removable
-                                            onDelete={handleDelete}
-                                        />
-                                    )
+                                posts.map(post =>
+                                    <PostCard
+                                        key={post._id}
+                                        post={post}
+                                        editable
+                                        removable
+                                        onDelete={handleDelete}
+                                    />)
                             }
                         </div>
                     :
